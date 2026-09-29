@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mcgrover06/TodoApp-FlutterFlow/blob/main/schemas/users.schema.json",
+  "title": "User",
+  "description": "A document in the Firestore 'users' collection of the TodoApp-FlutterFlow app.",
+  "type": "object",
+  "properties": {
+    "uid": {
+      "description": "Firebase Authentication user ID. Matches the document ID.",
+      "type": "string",
+      "minLength": 1
+    },
+    "email": {
+      "description": "Email address used to sign in.",
+      "type": "string",
+      "format": "email"
+    },
+    "display_name": {
+      "description": "Name shown in the app.",
+      "type": "string"
+    },
+    "photo_url": {
+      "description": "URL of the user's profile photo in Firebase Storage.",
+      "type": "string",
+      "format": "uri"
+    },
+    "created_time": {
+      "description": "Firestore timestamp for when the account was created, serialized as an RFC 3339 date-time string.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "birthday": {
+      "description": "Firestore timestamp, serialized as an RFC 3339 date-time string.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "phone_number": {
+      "description": "User's phone number.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "uid",
+    "email",
+    "created_time"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "uid": "REPLACE_WITH_YOUR_UID",
+      "email": "REPLACE_WITH_YOUR_URI_EMAIL@uri.edu",
+      "display_name": "MarkyG",
+      "photo_url": "https://firebasestorage.googleapis.com/v0/REPLACE",
+      "created_time": "2026-09-20T14:30:00-04:00",
+      "birthday": "2005-01-01T00:00:00-05:00",
+      "phone_number": ""
+    }
+  ]
+}
