@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -76,13 +78,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? TasksWidget() : LgoinWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LgoinWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? TasksWidget() : LgoinWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LgoinWidget(),
         ),
         FFRoute(
           name: LgoinWidget.routeName,
@@ -92,12 +94,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: TasksWidget.routeName,
           path: TasksWidget.routePath,
-          builder: (context, params) => TasksWidget(),
+          builder: (context, params) =>
+              params.isEmpty ? NavBarPage(initialPage: 'tasks') : TasksWidget(),
         ),
         FFRoute(
           name: OnboardingWidget.routeName,
           path: OnboardingWidget.routePath,
           builder: (context, params) => OnboardingWidget(),
+        ),
+        FFRoute(
+          name: DetailsWidget.routeName,
+          path: DetailsWidget.routePath,
+          asyncParams: {
+            'taskDoc': getDoc(['tasks'], TasksRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetailsWidget(
+            taskDoc: params.getParam(
+              'taskDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: CompletedWidget.routeName,
+          path: CompletedWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'completed')
+              : CompletedWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
