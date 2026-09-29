@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mcgrover06/TodoApp-FlutterFlow/blob/main/schemas/tasks.schema.json",
+  "title": "Task",
+  "description": "A document in the Firestore 'tasks' collection of the TodoApp-FlutterFlow app.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "description": "Short name of the task.",
+      "type": "string",
+      "minLength": 1
+    },
+    "details": {
+      "description": "Longer description of the task.",
+      "type": "string"
+    },
+    "completed": {
+      "description": "Whether the task has been marked done.",
+      "type": "boolean",
+      "default": false
+    },
+    "created": {
+      "description": "Firestore timestamp for when the task was created, serialized as an RFC 3339 date-time string.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "user": {
+      "description": "Firestore document reference to the owning user, serialized as its path.",
+      "type": "string",
+      "pattern": "^/?users/[A-Za-z0-9]+$"
+    }
+  },
+  "required": [
+    "title",
+    "completed",
+    "created",
+    "user"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "title": "Turn in CSC305 Assignment 3",
+      "details": "Submit the FlutterFlow and GitHub workflow assignment.",
+      "completed": false,
+      "created": "2026-09-28T10:05:53-04:00",
+      "user": "/users/REPLACE_WITH_YOUR_UID"
+    }
+  ]
+}
