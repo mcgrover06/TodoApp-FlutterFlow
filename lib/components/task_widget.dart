@@ -10,9 +10,11 @@ class TaskWidget extends StatefulWidget {
   const TaskWidget({
     super.key,
     required this.tasksDoc,
+    required this.checkAction,
   });
 
   final TasksRecord? tasksDoc;
+  final Future Function()? checkAction;
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -31,6 +33,8 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TaskModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -71,6 +75,11 @@ class _TaskWidgetState extends State<TaskWidget> {
                   value: _model.checkboxValue ??= widget.tasksDoc!.completed,
                   onChanged: (newValue) async {
                     safeSetState(() => _model.checkboxValue = newValue!);
+                    if (newValue!) {
+                      await widget.checkAction?.call();
+                    } else {
+                      await widget.checkAction?.call();
+                    }
                   },
                   side: (FlutterFlowTheme.of(context).alternate != null)
                       ? BorderSide(

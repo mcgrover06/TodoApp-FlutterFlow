@@ -5,24 +5,24 @@ import 'package:flutter/material.dart';
 class AddTaskModel extends FlutterFlowModel<AddTaskWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for Title widget.
+  FocusNode? titleFocusNode;
+  TextEditingController? titleTextController;
+  String? Function(BuildContext, String?)? titleTextControllerValidator;
+  // State field(s) for Details widget.
+  FocusNode? detailsFocusNode;
+  TextEditingController? detailsTextController;
+  String? Function(BuildContext, String?)? detailsTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    titleFocusNode?.dispose();
+    titleTextController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    detailsFocusNode?.dispose();
+    detailsTextController?.dispose();
   }
 }
