@@ -4,6 +4,7 @@ import '/components/add_task_widget.dart';
 import '/components/task_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -192,6 +193,33 @@ class _TasksWidgetState extends State<TasksWidget> {
                       },
                     );
                   },
+                ),
+              ),
+              FFButtonWidget(
+                onPressed: () async {
+                  GoRouter.of(context).prepareAuthEvent();
+                  await authManager.signOut();
+                  GoRouter.of(context).clearRedirectLocation();
+
+                  context.pushNamedAuth(LgoinWidget.routeName, context.mounted);
+                },
+                text: 'Logout',
+                options: FFButtonOptions(
+                  height: 40.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).primary,
+                  textStyle: GoogleFonts.roboto(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    fontSize: 20.0,
+                  ),
+                  elevation: 0.0,
+                  borderSide: BorderSide(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(24.0),
                 ),
               ),
             ].divide(SizedBox(height: 12.0)),
